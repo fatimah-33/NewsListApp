@@ -49,12 +49,13 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<List<
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             StringBuilder stringBuilder = new StringBuilder();
-            String inputText=bufferedReader.readLine();;
+            String inputText = bufferedReader.readLine();
+
             while (inputText != null) {
                 stringBuilder.append(inputText);
-                inputText=bufferedReader.readLine();
+                inputText = bufferedReader.readLine();
             }
-            newsList=new ArrayList<>();
+            newsList = new ArrayList<>();
             JSONObject jsonObject = new JSONObject(stringBuilder.toString());
             JSONObject getRoot = jsonObject.getJSONObject("response");
             JSONArray jsonArray = getRoot.getJSONArray("results");
@@ -65,8 +66,8 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<List<
                     String date = news.getString("webPublicationDate");
                     publishDate = date.substring(0, 10);
                     articleTitle = news.getString("webTitle");
-                    String uri=news.getString("webUrl");
-                    newsList.add(new NewsObjects(articleTitle, articleSection, publishDate));
+                    String urlWeb = news.getString("webUrl");
+                    newsList.add(new NewsObjects(articleTitle, articleSection, publishDate, urlWeb));
 
                 }
             }
@@ -86,7 +87,7 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<List<
 
     @Override
     protected void onStartLoading() {
-            forceLoad();
+        forceLoad();
     }
 
     @Override

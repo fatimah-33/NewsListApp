@@ -27,14 +27,13 @@ public class NewsAdapter extends ArrayAdapter<NewsObjects> {
 
         NewsObjects currantNewsList = getItem(position);
 
-        TextView articleSection = (TextView) newsListView.findViewById(R.id.article_section);
-        TextView publishDate = (TextView) newsListView.findViewById(R.id.date_publish);
-        TextView articleTitle = (TextView) newsListView.findViewById(R.id.article_title);
+        TextView articleSection = newsListView.findViewById(R.id.article_section);
+        TextView publishDate = newsListView.findViewById(R.id.date_publish);
+        TextView articleTitle = newsListView.findViewById(R.id.article_title);
 
         articleTitle.setText(currantNewsList.getArticleTitle());
         articleSection.setText(currantNewsList.getArticleSection());
         publishDate.setText(currantNewsList.getDatePublish());
-
 
 
         return newsListView;

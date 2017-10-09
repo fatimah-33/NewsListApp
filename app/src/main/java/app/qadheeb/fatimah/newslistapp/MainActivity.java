@@ -1,5 +1,7 @@
 package app.qadheeb.fatimah.newslistapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -13,25 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsObjects>> {
-    private List<NewsObjects> newsArrayList;
     NewsAdapter newsAdapter;
     LoaderManager loaderManager;
     private ListView listView;
-    private static final String MY_LIST_KEY = "newsList";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        newsArrayList = new ArrayList<>();
         listView = (ListView) findViewById(R.id.list_news);
         loaderManager = getSupportLoaderManager();
-        if (savedInstanceState != null && savedInstanceState.containsKey("newsList")) {
-            newsArrayList = savedInstanceState.getParcelableArrayList(MY_LIST_KEY);
-            listView = (ListView) findViewById(R.id.list_news);
-            newsAdapter = new NewsAdapter(MainActivity.this, newsArrayList);
-            listView.setAdapter(newsAdapter);
-        }
         loaderManager.initLoader(1, null, this);
     }
 
@@ -49,8 +42,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this, "this is "+i, Toast.LENGTH_LONG).show();
-
+                String urlWeb = newsAdapter.getItem(i).getUrlWeb();
+                Intent openUrl = new Intent(Intent.ACTION_VIEW);
+                openUrl.setData(Uri.parse(urlWeb));
+                startActivity(openUrl);
             }
         });
     }
