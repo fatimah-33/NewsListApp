@@ -28,7 +28,6 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<List<
     private List<NewsObjects> newsList;
     private String articleTitle;
     private String articleSection;
-    private String authorName;
     private String publishDate;
     private HttpURLConnection httpURLConnection;
     private URL url;
@@ -66,8 +65,8 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<List<
                     String date = news.getString("webPublicationDate");
                     publishDate = date.substring(0, 10);
                     articleTitle = news.getString("webTitle");
-                    authorName = news.getString("author");
-                    newsList.add(new NewsObjects(articleTitle, articleSection, publishDate, authorName));
+                    String uri=news.getString("webUrl");
+                    newsList.add(new NewsObjects(articleTitle, articleSection, publishDate));
 
                 }
             }

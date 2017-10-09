@@ -14,30 +14,31 @@ import java.util.List;
  */
 
 public class NewsAdapter extends ArrayAdapter<NewsObjects> {
-    public NewsAdapter(Context context, List<NewsObjects> bookList) {
-        super(context, 0, bookList);
+    public NewsAdapter(Context context, List<NewsObjects> newsList) {
+        super(context, 0, newsList);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View bookListView = convertView;
-        if (bookListView == null) {
-            bookListView = LayoutInflater.from(getContext()).inflate(R.layout.news_row, parent, false);
+        View newsListView = convertView;
+        if (newsListView == null) {
+            newsListView = LayoutInflater.from(getContext()).inflate(R.layout.news_row, parent, false);
         }
 
-        NewsObjects currantBookList = getItem(position);
+        NewsObjects currantNewsList = getItem(position);
 
-        TextView articleSection = (TextView) bookListView.findViewById(R.id.article_section);
-        TextView AuthorName = (TextView) bookListView.findViewById(R.id.author_name);
-        TextView publishDate = (TextView) bookListView.findViewById(R.id.date_publish);
-        TextView articleTitle = (TextView) bookListView.findViewById(R.id.article_title);
+        TextView articleSection = (TextView) newsListView.findViewById(R.id.article_section);
+        TextView publishDate = (TextView) newsListView.findViewById(R.id.date_publish);
+        TextView articleTitle = (TextView) newsListView.findViewById(R.id.article_title);
 
-        articleTitle.setText(currantBookList.getArticleTitle());
-        AuthorName.setText(currantBookList.getAuthorName());
-        articleSection.setText(currantBookList.getArticleSection());
-        publishDate.setText(currantBookList.getDatePublish());
+        articleTitle.setText(currantNewsList.getArticleTitle());
+        articleSection.setText(currantNewsList.getArticleSection());
+        publishDate.setText(currantNewsList.getDatePublish());
 
 
-        return bookListView;
+
+        return newsListView;
     }
+
+
 }

@@ -10,22 +10,18 @@ import android.os.Parcelable;
 public class NewsObjects implements Parcelable {
     private String articleTitle;
     private String articleSection;
-    private String authorName;
     private String datePublish;
 
-    public NewsObjects(String articleTitle, String articleSection, String authorName, String datePublish) {
+    public NewsObjects(String articleTitle, String articleSection, String datePublish) {
         this.articleTitle = articleTitle;
         this.articleSection = articleSection;
-        this.authorName = authorName;
         this.datePublish = datePublish;
     }
 
     protected NewsObjects(Parcel in) {
         articleTitle = in.readString();
         articleSection = in.readString();
-        authorName = in.readString();
         datePublish = in.readString();
-
     }
 
     public static final Creator<NewsObjects> CREATOR = new Creator<NewsObjects>() {
@@ -48,10 +44,6 @@ public class NewsObjects implements Parcelable {
         return articleSection;
     }
 
-    public String getAuthorName() {
-        return authorName;
-    }
-
     public String getDatePublish() {
         return datePublish;
     }
@@ -65,8 +57,6 @@ public class NewsObjects implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(articleTitle);
         parcel.writeString(articleSection);
-        parcel.writeString(authorName);
         parcel.writeString(datePublish);
-
     }
 }
