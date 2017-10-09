@@ -42,14 +42,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<List<NewsObjects>> loader, List<NewsObjects> data) {
-        if(data!=null) {
             listView = (ListView) findViewById(R.id.list_news);
             newsAdapter = new NewsAdapter(MainActivity.this, data);
             listView.setAdapter(newsAdapter);
-        }
-        else{
-            Toast.makeText(this, "no result found", Toast.LENGTH_LONG).show();
-        }
     }
 
     @Override

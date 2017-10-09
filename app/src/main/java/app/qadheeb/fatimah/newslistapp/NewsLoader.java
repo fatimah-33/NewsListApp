@@ -16,6 +16,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,16 +50,14 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<List<
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             StringBuilder stringBuilder = new StringBuilder();
-            String inputText;
-            while (bufferedReader.readLine() != null) {
-                inputText=bufferedReader.readLine();
+            String inputText=bufferedReader.readLine();;
+            while (inputText != null) {
                 stringBuilder.append(inputText);
+                inputText=bufferedReader.readLine();
             }
-            JSONObject jsonObjectStringBulider=null;
-            if(stringBuilder.toString()!=null) {
-                jsonObjectStringBulider = new JSONObject(stringBuilder.toString());
-            }
-            JSONObject getRoot = jsonObjectStringBulider.getJSONObject("response");
+            newsList=new ArrayList<>();
+            JSONObject jsonObject = new JSONObject(stringBuilder.toString());
+            JSONObject getRoot = jsonObject.getJSONObject("response");
             JSONArray jsonArray = getRoot.getJSONArray("results");
             if (jsonArray.length() > 0) {
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -68,7 +67,7 @@ public class NewsLoader extends android.support.v4.content.AsyncTaskLoader<List<
                     publishDate = date.substring(0, 10);
                     articleTitle = news.getString("webTitle");
                     authorName = news.getString("author");
-                    newsList.add(new NewsObjects(articleTitle, articleSection, publishDate, publishDate));
+                    newsList.add(new NewsObjects(articleTitle, articleSection, publishDate, authorName));
 
                 }
             }
