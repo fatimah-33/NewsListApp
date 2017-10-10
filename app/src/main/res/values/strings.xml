@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NewsListApp</string>
+    <string name="no_network">Please, Check Your Network</string>
+    <string name="no_data">Sorry, no data available to list</string>
 </resources>

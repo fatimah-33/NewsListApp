@@ -1,7 +1,5 @@
 package app.qadheeb.fatimah.newslistapp;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
 /**
  * Created by fatimah on 10/4/17.
@@ -12,12 +10,14 @@ public class NewsObjects {
     private String articleSection;
     private String datePublish;
     private String urlWeb;
+    private String authorName;
 
-    public NewsObjects(String articleTitle, String articleSection, String datePublish, String urlWeb) {
+    public NewsObjects(String articleTitle, String authorName, String articleSection, String datePublish, String urlWeb) {
         this.articleTitle = articleTitle;
         this.articleSection = articleSection;
         this.datePublish = datePublish;
         this.urlWeb = urlWeb;
+        this.authorName = authorName;
     }
 
     public String getArticleTitle() {
@@ -34,6 +34,10 @@ public class NewsObjects {
 
     public String getUrlWeb() {
         return urlWeb;
+    }
+
+    public String getAuthorName() {
+        return authorName;
     }
 
 }
