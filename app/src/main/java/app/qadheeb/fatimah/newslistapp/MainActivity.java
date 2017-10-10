@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<List<NewsObjects>> loader, List<NewsObjects> data) {
         if (data.isEmpty()) {
+            listView = (ListView) findViewById(R.id.list_news);
+            newsAdapter = new NewsAdapter(MainActivity.this, data);
+            listView.setAdapter(newsAdapter);
             Toast.makeText(this, "" + getString(R.string.no_data), Toast.LENGTH_SHORT).show();
         } else {
             listView = (ListView) findViewById(R.id.list_news);
@@ -61,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoaderReset(Loader<List<NewsObjects>> loader) {
-
     }
 
     public boolean checkNetworkConnection() {
